@@ -7,14 +7,12 @@ import {
   useSpring,
   MotionValue,
 } from "framer-motion";
-import { Link } from "@tanstack/react-router";
 
 export const HeroParallax = ({
   products,
 }: {
   products: {
     title: string;
-    link: string;
     thumbnail: string;
   }[];
 }) => {
@@ -104,7 +102,7 @@ export const HeroParallax = ({
 export const Header = () => {
   return (
     <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0">
-      <h1 className="text-6xl Head md:text-8xl font-bold dark:text-white">
+      <h1 className="text-6xl Head md:text-8xl font-bold text-white">
         Goodsly <br />
         <span className="text-2xl md:text-3xl Head">
           Your Style, Your Store, Your Way.
@@ -126,7 +124,6 @@ export const ProductCard = ({
 }: {
   product: {
     title: string;
-    link: string;
     thumbnail: string;
   };
   translate: MotionValue<number>;
@@ -142,10 +139,7 @@ export const ProductCard = ({
       key={product.title}
       className="group/product h-96 w-[43rem] relative flex-shrink-0"
     >
-      <Link
-        href={product.link}
-        className="block group-hover/product:shadow-2xl "
-      >
+      <div className="block group-hover/product:shadow-2xl ">
         <img
           src={product.thumbnail}
           height="600"
@@ -153,7 +147,7 @@ export const ProductCard = ({
           className="object-cover object-left-top absolute h-full w-full inset-0"
           alt={product.title}
         />
-      </Link>
+      </div>
       <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none"></div>
       <h2 className="absolute bottom-4 left-4 text-2xl font-mono  opacity-0 group-hover/product:opacity-100 text-white">
         {product.title}

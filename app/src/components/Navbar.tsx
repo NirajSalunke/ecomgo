@@ -10,7 +10,8 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Link } from "@tanstack/react-router";
-import { MenuIcon, PersonStandingIcon } from "lucide-react";
+import { LucideCross, PersonStandingIcon } from "lucide-react";
+import { IconMenu3 } from "@tabler/icons-react";
 
 const components: { title: string; href?: string; description: string }[] = [
   {
@@ -37,116 +38,211 @@ const components: { title: string; href?: string; description: string }[] = [
 ];
 
 export default function Navbar() {
+  const [isOpen, setisOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setisOpen(!isOpen);
+  };
   return (
-    <nav className="w-screen h-[8vh] ">
-      <div className="w-full h-full flex sm:hidden">
-        <div className="w-1/2 h-full items-center flex">
-          <div className="flex p-5 gap-2 items-center text-3xl Head ">
-            <PersonStandingIcon /> Goodsly
+    <>
+      <nav className="w-screen h-[8vh] sticky top-0 bg-white bg-opacity-95 z-50 ">
+        <div className="w-full h-full flex sm:hidden">
+          <div className="w-1/2 h-full items-center flex">
+            <div className="flex p-5 gap-2 items-center text-3xl Head ">
+              <PersonStandingIcon /> Goodsly
+            </div>
+          </div>
+          <div className="w-1/2 justify-end flex items-center h-full">
+            <div className="flex p-5 gap-2">
+              {!isOpen ? (
+                <IconMenu3 onClick={handleClick} />
+              ) : (
+                <LucideCross onClick={handleClick} className=" rotate-45" />
+              )}
+            </div>
           </div>
         </div>
-        <div className="w-1/2 justify-end flex items-center h-full">
-          <div className="flex p-5 gap-2">
-            <MenuIcon />
+        <div className=" hidden w-full h-full sm:flex ">
+          <div className="w-1/2 h-full items-center flex">
+            <div className="flex  items-center  p-5 text-4xl Head gap-2 ">
+              <PersonStandingIcon className="scale-125" /> Goodsly
+            </div>
           </div>
-        </div>
-      </div>
-      <div className=" hidden w-full h-full sm:flex ">
-        <div className="w-1/2 h-full items-center flex">
-          <div className="flex  items-center  p-5 text-4xl Head gap-2 ">
-            <PersonStandingIcon className="scale-125" /> Goodsly
-          </div>
-        </div>
-        <div className="w-1/2 justify-center flex items-center h-full">
-          <div className="flex p-5 gap-2">
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="Head text-xl">
-                    About us
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <a
-                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                            href="/"
-                          >
-                            <PersonStandingIcon className="h-6 w-6" />
-                            <div className="mb-2 mt-4 text-4xl font-bold Head">
-                              Goodsly
-                            </div>
-                            <p className="text-lg font-semibold  leading-tight Head text-muted-foreground">
-                              Everything. Everywhere. For You.
-                            </p>
-                          </a>
-                        </NavigationMenuLink>
-                      </li>
-                      <ListItem
-                        href="/docs"
-                        title="User-Centric Experience
-"
-                      >
-                        We prioritize simplicity and accessibility, ensuring
-                        that our platform is intuitive and easy to navigate for
-                        every customer. Our goal is to provide a seamless
-                        shopping experience, from browsing to checkout.
-                      </ListItem>
-                      <ListItem
-                        href="/docs/installation"
-                        title="Secure Transactions"
-                      >
-                        We understand the importance of trust in online
-                        shopping. Our platform uses advanced encryption and
-                        secure payment gateways to protect customer data and
-                        provide a safe shopping environment.
-                      </ListItem>
-                      <ListItem
-                        href="/docs/primitives/typography"
-                        title="Wide Product Selection"
-                      >
-                        We offer a diverse range of products to cater to every
-                        need and preference. Whether you're looking for the
-                        latest trends or everyday essentials, we aim to provide
-                        high-quality options at competitive prices.
-                      </ListItem>
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="Head text-xl">
-                    Features
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 ">
-                      {components.map((component) => (
+          <div className="w-1/2 justify-center flex items-center h-full">
+            <div className="flex p-5 gap-2">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="Head text-xl">
+                      About us
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                        <li className="row-span-3">
+                          <NavigationMenuLink asChild>
+                            <a
+                              className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                              href="/"
+                            >
+                              <PersonStandingIcon className="h-6 w-6" />
+                              <div className="mb-2 mt-4 text-4xl font-bold Head">
+                                Goodsly
+                              </div>
+                              <p className="text-lg font-semibold  leading-tight Head text-muted-foreground">
+                                Everything. Everywhere. For You.
+                              </p>
+                            </a>
+                          </NavigationMenuLink>
+                        </li>
                         <ListItem
-                          key={component.title}
-                          title={component.title}
-                          href={component.href}
+                          title="User-Centric Experience
+"
                         >
-                          {component.description}
+                          We prioritize simplicity and accessibility, ensuring
+                          that our platform is intuitive and easy to navigate
+                          for every customer. Our goal is to provide a seamless
+                          shopping experience, from browsing to checkout.
                         </ListItem>
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link href="/docs">
-                    <NavigationMenuLink
-                      className={`${navigationMenuTriggerStyle()} Head text-xl`}
-                    >
-                      Shop Now
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
+                        <ListItem title="Secure Transactions">
+                          We understand the importance of trust in online
+                          shopping. Our platform uses advanced encryption and
+                          secure payment gateways to protect customer data and
+                          provide a safe shopping environment.
+                        </ListItem>
+                        <ListItem title="Wide Product Selection">
+                          We offer a diverse range of products to cater to every
+                          need and preference. Whether you're looking for the
+                          latest trends or everyday essentials, we aim to
+                          provide high-quality options at competitive prices.
+                        </ListItem>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="Head text-xl">
+                      Features
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 ">
+                        {components.map((component) => (
+                          <ListItem
+                            key={component.title}
+                            title={component.title}
+                            href={component.href}
+                          >
+                            {component.description}
+                          </ListItem>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <div>
+                      <NavigationMenuLink
+                        className={`${navigationMenuTriggerStyle()} Head text-xl`}
+                      >
+                        Shop Now
+                      </NavigationMenuLink>
+                    </div>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
           </div>
         </div>
+      </nav>
+      <div
+        className={`fixed top-8vh text-white    transition-all duration-700  w-full h-[92vh]   ${isOpen ? "opacity-100 z-50 bg-opacity-85 bg-black " : "opacity-0 -z-50 "} `}
+      >
+        <NavigationMenu>
+          <NavigationMenuList className="flex-col gap-5 p-5  ">
+            <NavigationMenuItem className="w-screen  h-[10vh] flex items-center dark justify-center">
+              <NavigationMenuTrigger className="Head text-xl w-[90%] h-[90%]">
+                About us
+              </NavigationMenuTrigger>
+              <NavigationMenuContent className="">
+                <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                  <li className="row-span-3">
+                    <NavigationMenuLink asChild>
+                      <a
+                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                        href="/"
+                      >
+                        <PersonStandingIcon className="h-6 w-6" />
+                        <div className="mb-2 mt-4 text-4xl font-bold Head">
+                          Goodsly
+                        </div>
+                        <p className="text-lg font-semibold  leading-tight Head text-muted-foreground">
+                          Everything. Everywhere. For You.
+                        </p>
+                      </a>
+                    </NavigationMenuLink>
+                  </li>
+                  <ListItem
+                    href="/docs"
+                    title="User-Centric Experience
+"
+                  >
+                    We prioritize simplicity and accessibility, ensuring that
+                    our platform is intuitive and easy to navigate for every
+                    customer. Our goal is to provide a seamless shopping
+                    experience, from browsing to checkout.
+                  </ListItem>
+                  <ListItem
+                    href="/docs/installation"
+                    title="Secure Transactions"
+                  >
+                    We understand the importance of trust in online shopping.
+                    Our platform uses advanced encryption and secure payment
+                    gateways to protect customer data and provide a safe
+                    shopping environment.
+                  </ListItem>
+                  <ListItem
+                    href="/docs/primitives/typography"
+                    title="Wide Product Selection"
+                  >
+                    We offer a diverse range of products to cater to every need
+                    and preference. Whether you're looking for the latest trends
+                    or everyday essentials, we aim to provide high-quality
+                    options at competitive prices.
+                  </ListItem>
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem className="w-screen h-[10vh] flex items-center dark justify-center">
+              <NavigationMenuTrigger className="Head text-xl w-[90%] h-[90%] ">
+                Features
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 ">
+                  {components.map((component) => (
+                    <ListItem
+                      key={component.title}
+                      title={component.title}
+                      href={component.href}
+                    >
+                      {component.description}
+                    </ListItem>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem className="w-screen h-[10vh] flex items-center dark justify-center ">
+              <Link
+                href="/#signup"
+                className="w-full h-full flex justify-center items-center"
+              >
+                <NavigationMenuLink
+                  className={`${navigationMenuTriggerStyle()} Head text-xl w-screen h-[100%] `}
+                >
+                  Shop Now
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
       </div>
-    </nav>
+    </>
   );
 }
 

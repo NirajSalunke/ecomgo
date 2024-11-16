@@ -21,6 +21,7 @@
 }
 @layer base {
   :root {
+    scroll-behavior: smooth;
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -74,11 +75,12 @@
     --chart-5: 340 75% 55%;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
-    @apply dark bg-background text-foreground;
+    @apply bg-background text-foreground;
   }
 }
