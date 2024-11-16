@@ -1,12 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/NirajSalunke/ecomgo/config"
+	"github.com/NirajSalunke/ecomgo/routes"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
 )
 
@@ -17,13 +19,17 @@ func main() {
 	}
 
 	defer config.CloseDB()
-
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello, World!")
-	})
+	router := chi.NewRouter()
+	router.Use(cors.Handler(cors.Options{
+		AllowedOrigins:   []string{"https://*", "http://*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
+		AllowedHeaders:   []string{"*"},
+		AllowCredentials: true,
+	}))
+	routes.MountRoutes(router)
 
 	log.Printf("Server starting on port %v...\n", os.Getenv("PORT"))
-	err1 := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
+	err1 := http.ListenAndServe(":"+os.Getenv("PORT"), router)
 	if err1 != nil {
 		log.Fatalf("Error starting server: %v", err)
 	}

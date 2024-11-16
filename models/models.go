@@ -20,7 +20,7 @@ type Product struct {
 	Name        string             `bson:"name" json:"name"`
 	Price       float64            `bson:"price" json:"price"`
 	Description string             `bson:"description,omitempty" json:"description,omitempty"`
-	ImageURL    string             `bson:"image_url,omitempty" json:"image_url,omitempty"`
+	ImageURL    []string           `bson:"image_url,omitempty" json:"image_url,omitempty"`
 	Category    string             `bson:"category,omitempty" json:"category,omitempty"`
 	Stock       int                `bson:"stock" json:"stock"`
 	CreatedAt   primitive.DateTime `bson:"created_at" json:"created_at"`
