@@ -31,10 +31,10 @@ const Signup = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // log(e);
-    console.log(e.target[0].value);
-    console.log(e.target[1].value);
-    console.log(e.target[2].value);
-    console.log(e.target[3].value);
+    // console.log(e.target[0].value);
+    // console.log(e.target[1].value);
+    // console.log(e.target[2].value);
+    // console.log(e.target[3].value);
     console.log("Form submitted");
   };
   return (

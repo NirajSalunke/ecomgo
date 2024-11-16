@@ -1,0 +1,48 @@
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Binaries
+*.bin
+*.o
+*.out
+*.a
+*.lo
+*.la
+*.lai
+*.gch
+*.pyc
+
+# Test binary
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.coverprofile
+
+# IDE and editor settings
+.idea/
+.vscode/
+*.swp
+*~
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# Dependency directories (usually created via `go mod`)
+vendor/
+
+# Go build cache and module files
+/go-build/
+/deps/
+
+# Generated files
+*.gen.go
+
+# System files
+.DS_Store
+Thumbs.db
