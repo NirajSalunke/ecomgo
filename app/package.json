@@ -22,6 +22,7 @@
     "vite": "^5.4.8"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.15.5",
     "@gsap/react": "^2.1.1",
     "@radix-ui/react-hover-card": "^1.1.2",
     "@radix-ui/react-label": "^2.1.0",
@@ -33,6 +34,7 @@
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
     "framer-motion": "^11.11.17",
     "gsap": "^3.12.5",
     "lucide-react": "^0.457.0",

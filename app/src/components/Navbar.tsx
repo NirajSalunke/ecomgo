@@ -12,6 +12,13 @@ import {
 import { Link } from "@tanstack/react-router";
 import { LucideCross, PersonStandingIcon } from "lucide-react";
 import { IconMenu3 } from "@tabler/icons-react";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+  UserProfile,
+} from "@clerk/clerk-react";
 
 const components: { title: string; href?: string; description: string }[] = [
   {
@@ -145,6 +152,19 @@ export default function Navbar() {
                       </NavigationMenuLink>
                     </div>
                   </NavigationMenuItem>
+                  {/* desktop */}
+                  <NavigationMenuItem className="flex items-center justify-center p-5">
+                    <SignedOut>
+                      <SignInButton>
+                        <NavigationMenuTrigger className="Head text-xl">
+                          Sign in
+                        </NavigationMenuTrigger>
+                      </SignInButton>
+                    </SignedOut>
+                    <SignedIn>
+                      <UserButton />
+                    </SignedIn>
+                  </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
@@ -238,6 +258,17 @@ export default function Navbar() {
                   Shop Now
                 </NavigationMenuLink>
               </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <SignedOut>
+                {/* mobile */}
+                <SignInButton>
+                  <button>yeah</button>
+                </SignInButton>
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>

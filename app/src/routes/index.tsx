@@ -29,9 +29,9 @@ function HomeComponent() {
           <br className="sm:hidden" /> Faster
         </motion.h1>
       </LampContainer>
-      <Vortex backgroundColor="black" className="">
+      {/* <Vortex backgroundColor="black" className="">
         <Signup />
-      </Vortex>
+      </Vortex> */}
     </main>
   );
 }

@@ -6,9 +6,6 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { IconBrandGoogle } from "@tabler/icons-react";
 import { LinkPreview } from "./ui/link-preview";
-import qs from "qs";
-import axios, { isCancel, AxiosError } from "axios";
-import { last } from "node_modules/@tanstack/react-router/dist/esm/utils";
 const BottomGradient = () => {
   return (
     <>
@@ -36,38 +33,6 @@ const Signup = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    const date = new Date().toISOString();
-    console.log(date);
-    e.preventDefault();
-    axios
-      .post(
-        "http://localhost:8080/auth/signup",
-        qs.stringify({
-          name: firstName + " " + lastName,
-          email: email,
-          password: password,
-        }),
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      )
-      .then((response) => {
-        console.log("Response:", response.data);
-      })
-      .catch((error) => {
-        console.error(
-          "Error:",
-          error.response ? error.response.data : error.message
-        );
-      });
-
-    // log(e);
-    // console.log(e.target[0].value);
-    // console.log(e.target[1].value);
-    // console.log(e.target[2].value);
-    // console.log(e.target[3].value);
     console.log("Form submitted");
   };
   return (
