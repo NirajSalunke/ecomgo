@@ -1,5 +1,5 @@
-import * as React from "react";
 import { cn } from "@/lib/utils";
+import * as React from "react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -18,9 +18,10 @@ import {
   SignInButton,
   SignUpButton,
   UserButton,
-  UserProfile,
+  useUser,
 } from "@clerk/clerk-react";
-
+import axios from "axios";
+import qs from "qs";
 const components: { title: string; href?: string; description: string }[] = [
   {
     title: "Product Reviews",
@@ -47,7 +48,35 @@ const components: { title: string; href?: string; description: string }[] = [
 
 export default function Navbar() {
   const [isOpen, setisOpen] = React.useState(false);
-
+  const { user, isLoaded, isSignedIn } = useUser();
+  const sendcreateUserReq = async () => {
+    if (!isLoaded) {
+      console.log("Went wrong");
+      return;
+    }
+    if (!isSignedIn) {
+      console.error("User not signed in");
+      return;
+    }
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/create",
+        qs.stringify({
+          name: user.username || "Anonymous", // Handle missing username
+          email: user.emailAddresses[0]?.emailAddress || "No email provided",
+          image_url: user.imageUrl || "",
+        }),
+        { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
+      );
+      console.log("User creation successful:", response.data);
+      return;
+    } catch (err) {
+      console.error("Failed to create user:");
+    }
+  };
+  React.useEffect(() => {
+    sendcreateUserReq();
+  }, [isSignedIn]);
   const handleClick = () => {
     setisOpen(!isOpen);
   };
@@ -159,7 +188,7 @@ export default function Navbar() {
                   {/* desktop */}
                   <NavigationMenuItem className="flex items-center justify-center p-5">
                     <SignedOut>
-                      <SignInButton>
+                      <SignInButton signUpFallbackRedirectUrl={"/"}>
                         <NavigationMenuTrigger className="Head text-xl">
                           Sign in
                         </NavigationMenuTrigger>
