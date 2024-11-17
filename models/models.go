@@ -8,7 +8,6 @@ type User struct {
 	Name      string               `bson:"name" json:"name"`
 	Email     string               `bson:"email" json:"email"`
 	Password  string               `bson:"password" json:"-"`
-	Phone     string               `bson:"phone,omitempty" json:"phone,omitempty"`
 	Address   string               `bson:"address,omitempty" json:"address,omitempty"`
 	Orders    []primitive.ObjectID `bson:"orders,omitempty" json:"orders,omitempty"`
 	CreatedAt primitive.DateTime   `bson:"created_at" json:"created_at"`

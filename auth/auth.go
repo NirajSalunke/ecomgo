@@ -7,10 +7,12 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"time"
 
 	"github.com/NirajSalunke/ecomgo/config"
 	"github.com/NirajSalunke/ecomgo/models"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -20,14 +22,10 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Methods", "POST")
 
 	db := config.UserCollection
-
-	// Check Content-Type
 	if r.Header.Get("Content-Type") != "application/x-www-form-urlencoded" {
 		http.Error(w, "Invalid Content-Type, expected application/x-www-form-urlencoded", http.StatusUnsupportedMediaType)
 		return
 	}
-
-	// Parse form data
 	err := r.ParseForm()
 	if err != nil {
 		http.Error(w, "Unable to parse form data", http.StatusBadRequest)
@@ -52,8 +50,8 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
-
-	// Insert new user into the database
+	newUser.CreatedAt = primitive.NewDateTimeFromTime(time.Now())
+	newUser.UpdatedAt = primitive.NewDateTimeFromTime(time.Now())
 	result, err := db.InsertOne(context.TODO(), newUser)
 	if err != nil {
 		log.Println("Error inserting user:", err)
@@ -70,7 +68,5 @@ func parseFormToUser(formData url.Values) models.User {
 		Name:     formData.Get("name"),
 		Password: formData.Get("password"),
 		Email:    formData.Get("email"),
-		Phone:    formData.Get("phone"),
-		Address:  formData.Get("address"),
 	}
 }

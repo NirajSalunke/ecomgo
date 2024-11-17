@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TypewriterEffectSmooth } from "./ui/typewriter-effect";
 import { words } from "@/constants";
 import { Label } from "@/components/ui/label";
@@ -6,6 +6,9 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { IconBrandGoogle } from "@tabler/icons-react";
 import { LinkPreview } from "./ui/link-preview";
+import qs from "qs";
+import axios, { isCancel, AxiosError } from "axios";
+import { last } from "node_modules/@tanstack/react-router/dist/esm/utils";
 const BottomGradient = () => {
   return (
     <>
@@ -28,8 +31,38 @@ const LabelInputContainer = ({
   );
 };
 const Signup = () => {
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setlastName] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const date = new Date().toISOString();
+    console.log(date);
     e.preventDefault();
+    axios
+      .post(
+        "http://localhost:8080/auth/signup",
+        qs.stringify({
+          name: firstName + " " + lastName,
+          email: email,
+          password: password,
+        }),
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      )
+      .then((response) => {
+        console.log("Response:", response.data);
+      })
+      .catch((error) => {
+        console.error(
+          "Error:",
+          error.response ? error.response.data : error.message
+        );
+      });
+
     // log(e);
     // console.log(e.target[0].value);
     // console.log(e.target[1].value);
@@ -78,24 +111,64 @@ const Signup = () => {
             <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
               <LabelInputContainer>
                 <Label htmlFor="firstname">First name</Label>
-                <Input id="firstname" placeholder="Tyler" type="text" />
+                <Input
+                  required
+                  id="firstname"
+                  name="firstname"
+                  value={firstName}
+                  placeholder="Niraj"
+                  type="text"
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setfirstName(e.target.value);
+                  }}
+                />
               </LabelInputContainer>
               <LabelInputContainer>
                 <Label htmlFor="lastname">Last name</Label>
-                <Input id="lastname" placeholder="Durden" type="text" />
+                <Input
+                  required
+                  id="lastname"
+                  type="text"
+                  name="lastname"
+                  value={lastName}
+                  placeholder="Salunke"
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setlastName(e.target.value);
+                  }}
+                />
               </LabelInputContainer>
             </div>
             <LabelInputContainer className="mb-4">
               <Label htmlFor="email">Email Address</Label>
               <Input
+                required
                 id="email"
-                placeholder="projectmayhem@fc.com"
                 type="email"
+                name="email"
+                value={email}
+                placeholder="nirajsalunke@gmail.com"
+                onChange={(e) => {
+                  e.preventDefault();
+                  setemail(e.target.value);
+                }}
               />
             </LabelInputContainer>
             <LabelInputContainer className="mb-4">
               <Label htmlFor="password">Password</Label>
-              <Input id="password" placeholder="••••••••" type="password" />
+              <Input
+                required
+                id="password"
+                placeholder="••••••••"
+                type="password"
+                value={password}
+                name="password"
+                onChange={(e) => {
+                  e.preventDefault();
+                  setpassword(e.target.value);
+                }}
+              />
             </LabelInputContainer>
 
             <button
