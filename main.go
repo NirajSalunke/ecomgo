@@ -6,7 +6,6 @@ import (
 	"os"
 
 	"github.com/NirajSalunke/ecomgo/config"
-	"github.com/NirajSalunke/ecomgo/routes"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
@@ -26,7 +25,6 @@ func main() {
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
 	}))
-	routes.MountRoutes(router)
 
 	log.Printf("Server starting on port %v...\n", os.Getenv("PORT"))
 	err1 := http.ListenAndServe(":"+os.Getenv("PORT"), router)

@@ -50,7 +50,6 @@ func init() {
 	fmt.Println("Successfully connected to MongoDB!")
 }
 
-// CloseDB closes the MongoDB connection when the application shuts down.
 func CloseDB() {
 	if client != nil {
 		err := client.Disconnect(context.TODO())
