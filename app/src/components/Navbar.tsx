@@ -16,6 +16,7 @@ import {
   SignedIn,
   SignedOut,
   SignInButton,
+  SignUpButton,
   UserButton,
   UserProfile,
 } from "@clerk/clerk-react";
@@ -60,6 +61,9 @@ export default function Navbar() {
             </div>
           </div>
           <div className="w-1/2 justify-end flex items-center h-full">
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
             <div className="flex p-5 gap-2">
               {!isOpen ? (
                 <IconMenu3 onClick={handleClick} />
@@ -161,6 +165,15 @@ export default function Navbar() {
                         </NavigationMenuTrigger>
                       </SignInButton>
                     </SignedOut>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem className="flex items-center justify-center ">
+                    <SignedOut>
+                      <SignUpButton>
+                        <NavigationMenuTrigger className="Head text-xl">
+                          Sign Up
+                        </NavigationMenuTrigger>
+                      </SignUpButton>
+                    </SignedOut>
                     <SignedIn>
                       <UserButton />
                     </SignedIn>
@@ -259,16 +272,23 @@ export default function Navbar() {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-            <NavigationMenuItem>
+            <NavigationMenuItem className="w-screen h-[10vh] flex items-center dark justify-center ">
               <SignedOut>
-                {/* mobile */}
-                <SignInButton>
-                  <button>yeah</button>
-                </SignInButton>
+                <SignUpButton>
+                  <NavigationMenuTrigger className="Head text-xl">
+                    Sign Up
+                  </NavigationMenuTrigger>
+                </SignUpButton>
               </SignedOut>
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
+            </NavigationMenuItem>
+            <NavigationMenuItem className="w-screen h-[10vh] flex items-center dark justify-center ">
+              <SignedOut>
+                <SignUpButton>
+                  <NavigationMenuTrigger className="Head text-xl">
+                    Sign-up
+                  </NavigationMenuTrigger>
+                </SignUpButton>
+              </SignedOut>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
