@@ -95,3 +95,31 @@ export const products: Product[] = [
       "https://firebasestorage.googleapis.com/v0/b/e-com-20f8d.appspot.com/o/reebook.png?alt=media&token=29d08aa2-dc0c-4786-aae5-8e25f1b65269",
   },
 ];
+
+export const components: {
+  title: string;
+  href?: string;
+  description: string;
+}[] = [
+  {
+    title: "Product Reviews",
+    description:
+      "Check customer reviews and ratings to make informed purchase decisions.",
+  },
+  {
+    title: "Secure Checkout",
+    description:
+      "Experience a fast and secure checkout process with multiple payment options.",
+  },
+
+  {
+    title: "Wishlist",
+    description:
+      "Save your favorite items and purchase them later with our Wishlist feature.",
+  },
+  {
+    title: "Discount Alerts",
+    description:
+      "Receive notifications about ongoing sales, discounts, and exclusive offers.",
+  },
+];

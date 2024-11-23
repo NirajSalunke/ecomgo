@@ -1,25 +1,38 @@
-import { Spotlight } from "./ui/spotlight";
+import { Link, PersonStandingIcon } from "lucide-react";
+import { Spotlight } from "./ui/Spotlight";
 import { Vortex } from "./ui/vortex";
+import { TextHoverEffect } from "./ui/text-hover-effect";
+import { LinkPreview } from "./ui/link-preview";
+// import { SparklesCore } from "./ui/sparkles";
 
 const Footer = () => {
   return (
-    <div className="h-[40rem] w-full rounded-md flex md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden">
-      <Spotlight
-        className="-top-40 left-0 md:left-60 md:-top-20"
-        fill="white"
-      />
-      <div className=" p-4 max-w-7xl  mx-auto relative z-10  w-full pt-20 md:pt-0">
-        <h1 className="text-4xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
-          Spotlight <br /> is the new trend.
-        </h1>
-        <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto">
-          Spotlight effect is a great way to draw attention to a specific part
-          of the page. Here, we are drawing the attention towards the text
-          section of the page. I don&apos;t know why but I&apos;m running out of
-          copy.
-        </p>
+    <>
+      <footer className="w-screen h-[20vh] bg-black text-white md:hidden">
+        <div className="flex px-5 gap-1 items-center text-7xl  Head ">
+          <PersonStandingIcon className="scale-[2]" />
+          Goodsly
+        </div>
+        <LinkPreview
+          className="text-lg px-6 Head text-white"
+          url="https://nirajsalunke.netlify.app/"
+        >
+          By Niraj Salunke
+        </LinkPreview>
+      </footer>
+      <div className="h-[40rem] md:flex items-center hidden flex-col bg-black justify-center">
+        <TextHoverEffect automatic text="GOODSLY" />
+        <div className="text-3xl pt-24 p-5 Head text-white">
+          <LinkPreview
+            className="text-white flex items-center gap-5"
+            url="https://nirajsalunke.netlify.app/"
+          >
+            Developed by Niraj Salunke
+          </LinkPreview>
+        </div>
+        {/* <div className="text-xl p-5  Head text-white"></div> */}
       </div>
-    </div>
+    </>
   );
 };
 

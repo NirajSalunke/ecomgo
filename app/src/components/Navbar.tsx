@@ -22,49 +22,25 @@ import {
 } from "@clerk/clerk-react";
 import axios from "axios";
 import qs from "qs";
-const components: { title: string; href?: string; description: string }[] = [
-  {
-    title: "Product Reviews",
-    description:
-      "Check customer reviews and ratings to make informed purchase decisions.",
-  },
-  {
-    title: "Secure Checkout",
-    description:
-      "Experience a fast and secure checkout process with multiple payment options.",
-  },
-
-  {
-    title: "Wishlist",
-    description:
-      "Save your favorite items and purchase them later with our Wishlist feature.",
-  },
-  {
-    title: "Discount Alerts",
-    description:
-      "Receive notifications about ongoing sales, discounts, and exclusive offers.",
-  },
-];
+import { components } from "@/constants";
 
 export default function Navbar() {
   const [isOpen, setisOpen] = React.useState(false);
   const { user, isLoaded, isSignedIn } = useUser();
   const sendcreateUserReq = async () => {
     if (!isLoaded) {
-      // console.log("Went wrong");
       return;
     }
     if (!isSignedIn) {
-      // console.error("User not signed in");
       return;
     }
     try {
-      const response = await axios.post(
-        "http://localhost:8080/create",
+      await axios.post(
+        `${process.env.BACKEND_LINK}/create`,
         qs.stringify({
-          name: user.username || "Anonymous", // Handle missing username
-          email: user.emailAddresses[0]?.emailAddress || "No email provided",
-          image_url: user.imageUrl || "",
+          name: user.username,
+          email: user.emailAddresses[0]?.emailAddress,
+          image_url: user.imageUrl,
         }),
         { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
       );
@@ -82,7 +58,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="w-screen h-[8vh] sticky top-0 bg-white bg-opacity-95 z-50 ">
-        <div className="w-full h-full flex sm:hidden">
+        <div className="w-full h-full flex md:hidden">
           <div className="w-1/2 h-full items-center flex">
             <div className="flex p-5 gap-2 items-center text-3xl Head ">
               <PersonStandingIcon /> Goodsly
@@ -101,7 +77,7 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-        <div className=" hidden w-full h-full sm:flex ">
+        <div className=" hidden w-full h-full md:flex ">
           <div className="w-1/2 h-full items-center flex">
             <div className="flex  items-center  p-5 text-4xl Head gap-2 ">
               <PersonStandingIcon className="scale-125" /> Goodsly
@@ -176,13 +152,13 @@ export default function Navbar() {
                     </NavigationMenuContent>
                   </NavigationMenuItem>
                   <NavigationMenuItem>
-                    <div>
+                    <Link to="/home">
                       <NavigationMenuLink
                         className={`${navigationMenuTriggerStyle()} Head text-xl`}
                       >
                         Shop Now
                       </NavigationMenuLink>
-                    </div>
+                    </Link>
                   </NavigationMenuItem>
                   {/* desktop */}
                   <NavigationMenuItem className="flex items-center justify-center p-5">
@@ -290,10 +266,13 @@ export default function Navbar() {
             </NavigationMenuItem>
             <NavigationMenuItem className="w-screen h-[10vh] flex items-center dark justify-center ">
               <Link
-                href="/#signup"
-                className="w-full h-full flex justify-center items-center"
+                to="/home"
+                className="w-full cursor-pointer h-full flex justify-center items-center"
               >
                 <NavigationMenuLink
+                  onClick={() => {
+                    setisOpen(false);
+                  }}
                   className={`${navigationMenuTriggerStyle()} Head text-xl w-screen h-[100%] `}
                 >
                   Shop Now

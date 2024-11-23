@@ -6,5 +6,5 @@ export const Route = createFileRoute("/home")({
 });
 
 function RouteComponent() {
-  return "Hello /home!";
+  return <main className="w-screen"></main>;
 }

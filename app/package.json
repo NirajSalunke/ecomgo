@@ -30,6 +30,7 @@
     "@tabler/icons-react": "^3.22.0",
     "@tanstack/react-router": "^1.81.9",
     "@tanstack/router-devtools": "^1.81.9",
+    "@types/qs": "^6.9.17",
     "app": "file:",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
