@@ -51,11 +51,11 @@ export default function Navbar() {
   const { user, isLoaded, isSignedIn } = useUser();
   const sendcreateUserReq = async () => {
     if (!isLoaded) {
-      console.log("Went wrong");
+      // console.log("Went wrong");
       return;
     }
     if (!isSignedIn) {
-      console.error("User not signed in");
+      // console.error("User not signed in");
       return;
     }
     try {
@@ -68,10 +68,9 @@ export default function Navbar() {
         }),
         { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
       );
-      console.log("User creation successful:", response.data);
       return;
     } catch (err) {
-      console.error("Failed to create user:");
+      console.error(err);
     }
   };
   React.useEffect(() => {

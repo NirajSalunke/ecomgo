@@ -28,9 +28,10 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	imageURL := r.FormValue("image_url")
 
 	db := config.UserCollection
-	res := db.FindOne(context.TODO(), bson.M{email: email})
+	fmt.Println(email)
+	res := db.FindOne(context.TODO(), bson.M{"email": email})
+	fmt.Println(res.Err())
 	if res.Err() == nil {
-
 		fmt.Println("User already exits")
 		return
 	}
@@ -47,5 +48,4 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println(res1.InsertedID)
 	w.WriteHeader(http.StatusOK)
-
 }
