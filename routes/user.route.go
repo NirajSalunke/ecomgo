@@ -28,7 +28,6 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	imageURL := r.FormValue("image_url")
 
 	db := config.UserCollection
-	// fmt.Println(email)
 	res := db.FindOne(context.TODO(), bson.M{"email": email})
 	// fmt.Println(res.Err())
 	if res.Err() == nil {

@@ -169,15 +169,17 @@ export default function Navbar() {
                       </ul>
                     </NavigationMenuContent>
                   </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <Link to="/home">
-                      <NavigationMenuLink
-                        className={`${navigationMenuTriggerStyle()} Head text-xl`}
-                      >
-                        Shop Now
-                      </NavigationMenuLink>
-                    </Link>
-                  </NavigationMenuItem>
+                  {url !== "/home" && (
+                    <NavigationMenuItem>
+                      <Link to="/home">
+                        <NavigationMenuLink
+                          className={`${navigationMenuTriggerStyle()} Head text-xl`}
+                        >
+                          Shop Now
+                        </NavigationMenuLink>
+                      </Link>
+                    </NavigationMenuItem>
+                  )}
                   {/* desktop */}
                   <NavigationMenuItem className="flex items-center justify-center p-5">
                     <SignedOut>
