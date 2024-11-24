@@ -9,7 +9,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { LucideCross, PersonStandingIcon } from "lucide-react";
 import { IconMenu3 } from "@tabler/icons-react";
 import {
@@ -22,9 +22,17 @@ import {
 } from "@clerk/clerk-react";
 import axios from "axios";
 import qs from "qs";
-import { components } from "@/constants";
+import { components, placeholders } from "@/constants";
+import Search from "./Search";
+import { PlaceholdersAndVanishInput } from "./ui/placeholders-and-vanish-input";
 
 export default function Navbar() {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {};
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("submitted");
+  };
+  const url = useLocation().pathname;
   const [isOpen, setisOpen] = React.useState(false);
   const { user, isLoaded, isSignedIn } = useUser();
   const sendcreateUserReq = async () => {
@@ -79,9 +87,20 @@ export default function Navbar() {
         </div>
         <div className=" hidden w-full h-full md:flex ">
           <div className="w-1/2 h-full items-center flex">
-            <div className="flex  items-center  p-5 text-4xl Head gap-2 ">
+            <div className="flex  items-center  p-5 text-4xl  Head gap-2 ">
               <PersonStandingIcon className="scale-125" /> Goodsly
             </div>
+            {url == "/home" && (
+              <div
+                className={`h-full w-screen flex justify-center para  items-center p-2 px-4 `}
+              >
+                <PlaceholdersAndVanishInput
+                  placeholders={placeholders}
+                  onChange={handleChange}
+                  onSubmit={onSubmit}
+                />
+              </div>
+            )}
           </div>
           <div className="w-1/2 justify-center flex items-center h-full">
             <div className="flex p-5 gap-2">

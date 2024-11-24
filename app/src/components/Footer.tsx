@@ -8,9 +8,9 @@ import { LinkPreview } from "./ui/link-preview";
 const Footer = () => {
   return (
     <>
-      <footer className="w-screen h-[20vh] bg-black text-white md:hidden">
-        <div className="flex px-5 gap-1 items-center text-7xl  Head ">
-          <PersonStandingIcon className="scale-[2]" />
+      <footer className="w-screen h-[20vh] bg-black flex flex-col justify-center items-center text-white md:hidden">
+        <div className="flex px-5 gap-4 items-center justify-center text-7xl  Head ">
+          <PersonStandingIcon className="scale-[2.5]" />
           Goodsly
         </div>
         <LinkPreview

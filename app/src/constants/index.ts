@@ -14,7 +14,15 @@ export const words: Word[] = [
     className: "text-blue-500 p-2 text-4xl Head dark:text-blue-500",
   },
 ];
-
+export const placeholders = [
+  "Best deals on iPhone?",
+  "Cheap sneakers for running",
+  "Affordable home office furniture",
+  "Best budget laptops for students",
+  "Cute phone cases online",
+  "Summer dresses for a wedding",
+  "Find a smartwatch under 2000",
+];
 export const products: Product[] = [
   {
     title: "Nike Footwear",
