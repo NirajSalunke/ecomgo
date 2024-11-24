@@ -23,7 +23,6 @@ import {
 import axios from "axios";
 import qs from "qs";
 import { components, placeholders } from "@/constants";
-import Search from "./Search";
 import { PlaceholdersAndVanishInput } from "./ui/placeholders-and-vanish-input";
 
 export default function Navbar() {
@@ -43,8 +42,8 @@ export default function Navbar() {
       return;
     }
     try {
-      await axios.post(
-        `${process.env.BACKEND_LINK}/create`,
+      const response = await axios.post(
+        `http://localhost:8080/create`,
         qs.stringify({
           name: user.username,
           email: user.emailAddresses[0]?.emailAddress,

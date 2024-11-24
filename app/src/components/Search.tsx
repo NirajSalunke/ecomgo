@@ -7,7 +7,7 @@ const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   console.log("submitted");
 };
-const Search = () => {
+const Search = ({ className }: { className: string }) => {
   return (
     <>
       <div

@@ -28,11 +28,11 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	imageURL := r.FormValue("image_url")
 
 	db := config.UserCollection
-	fmt.Println(email)
+	// fmt.Println(email)
 	res := db.FindOne(context.TODO(), bson.M{"email": email})
-	fmt.Println(res.Err())
+	// fmt.Println(res.Err())
 	if res.Err() == nil {
-		fmt.Println("User already exits")
+		fmt.Println("User already exists")
 		return
 	}
 	var newUser models.User
@@ -41,11 +41,11 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	newUser.ImageURL = imageURL
 	newUser.CreatedAt = primitive.NewDateTimeFromTime(time.Now())
 	newUser.UpdatedAt = primitive.NewDateTimeFromTime(time.Now())
-	res1, err1 := db.InsertOne(context.TODO(), newUser)
+	_, err1 := db.InsertOne(context.TODO(), newUser)
 	if err1 != nil {
 		fmt.Println("SOmething went wrong")
 		return
 	}
-	fmt.Println(res1.InsertedID)
+	fmt.Println("User created Successfully!")
 	w.WriteHeader(http.StatusOK)
 }
