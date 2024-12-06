@@ -20,10 +20,7 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   const [isLoading, setIsLoading] = useState(true);
-  // const url = useParams();
-  // const url = useParams();
   const url = useLocation().pathname;
-  // console.log(url.pathname);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -33,7 +30,7 @@ function RootComponent() {
     return () => clearTimeout(timer);
   }, []);
 
-  if (isLoading) {
+  if (isLoading && (url == "/home" || url == "/")) {
     return <LoaderScreen />;
   }
 
